@@ -1,0 +1,20 @@
+.col-4{
+    background-color: #F4F4F4;
+    height: 600px;
+    /* width: 500px; */
+
+}
+
+.student{
+    font-weight:normal;
+    margin-top:20px;
+}
+
+.col{
+   
+    margin-bottom: 10px;
+}
+
+.secondInputs{
+    margin-bottom:10px;
+}

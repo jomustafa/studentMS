@@ -1,0 +1,23 @@
+
+/* .col-sm-6{
+    margin: top 200px;
+} */
+.card-body{
+background-color:#F4F4F4;
+}
+
+.btn btn-primary{
+    background-color:#0F62FE;
+}
+.col-sm-4{
+   /* margin-left: 10px; 
+    margin-right: 10px;  */
+   
+   margin-bottom: 50px;
+   
+}
+
+#logo{
+   width: 50%;
+
+}
