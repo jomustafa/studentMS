@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Semester;
+use App\Models\Student;
 
 class SemestersController extends Controller
 {
@@ -15,8 +16,11 @@ class SemestersController extends Controller
      */
     public function index()
     {
-        $semesters = DB::table('semesters')->paginate(10);
-        return view('semesters\index')->with('semesters', $semesters);
+        // $semesters = DB::table('semesters')->paginate(10);
+        // return view('semesters.index')->with('semesters', $semesters);
+
+        $semesters = Semester::orderBy('id', 'DESC')->get();
+        return view('semesters.index')->with('semesters', $semesters);
     }
 
     /**
@@ -26,7 +30,7 @@ class SemestersController extends Controller
      */
     public function create()
     {
-        // return view('semesters/create');
+        return view('semesters.create');
 
     }
 
@@ -36,9 +40,9 @@ class SemestersController extends Controller
         $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%')-paginate(5);
 
         if(count($semesters) > 0)
-        return view('semesters\index', ['semesters' => $semesters]);
+        return view('semesters.index', ['semesters' => $semesters]);
         else
-        return view('semesters\index')->with('status', 
+        return view('semesters.index')->with('status', 
         'No results!');
     }
     /**
@@ -50,22 +54,22 @@ class SemestersController extends Controller
     public function store(Request $request)
     {
         
-        // $request->validate([
-        //     'semesterPeriod' => 'required',
-        //     'year' => 'required',
-        //     'academicLevel' => 'required'
-        // ]);
+        $request->validate([
+            'semesterPeriod' => 'required',
+            'year' => 'required',
+            'academicLevel' => 'required'
+        ]);
 
-        // $data['semesterPeriod'] = $request['semesterPeriod'];
-        // $data['year'] = $request['year'];
-        // $data['academicLevel'] = $request['academicLevel'];
+        $data['semesterPeriod'] = $request['semesterPeriod'];
+        $data['year'] = $request['year'];
+        $data['academicLevel'] = $request['academicLevel'];
 
-        // if( Semester::create($data))
-        // return redirect()->route('semesters/index')->with('status', 
-        // 'Semester was created successfully');
-        // else
-        // return redirect()->back()->with('status', 
-        // 'Something went wrong while creating!');
+        if( Semester::create($data))
+        return redirect()->route('semester.index')->with('success', 
+        'Semester was created successfully');
+        else
+        return redirect()->back()->with('error', 
+        'Something went wrong while creating Semester!');
     }
 
     /**
@@ -76,11 +80,17 @@ class SemestersController extends Controller
      */
     public function show($id)
     {
-        // $semester = Semester::find($id);
-        // $searchInput = Input::get('searchInput');
-        // info($searchInput);
-        //return view('semesters/show');
-        //->with('semester',$semester);
+        // // $semester = Semester::find($id);
+        // // $searchInput = Input::get('searchInput');
+        // // info($searchInput);
+        // // return view('semesters/show');
+        // // ->with('semester',$semester);
+
+        // //mi kqyr studentat e qati semestri
+        $semester = Semester::find($id);
+        $students = $semester->students;
+
+        return view('semesters.show');
 
     }
 
@@ -92,8 +102,8 @@ class SemestersController extends Controller
      */
     public function edit($id)
     {
-        // $semester = Semester::find($id);
-        // return view('semesters/edit')->with('semester',$semester);
+        $semester = Semester::find($id);
+        return view('semesters.edit')->with('semester',$semester);
     }
 
     /**
@@ -105,24 +115,25 @@ class SemestersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $request->validate([
-        //     'semesterPeriod' => 'required',
-        //     'year' => 'required',
-        //     'academicLevel' => 'required'
-        // ]);
+        $request->validate([
+            'semesterPeriod' => 'required',
+            'year' => 'required',
+            'academicLevel' => 'required'
+        ]);
 
-        // $semester = Semester::find($id);
+        
+        $data['semesterPeriod'] = $request['semesterPeriod'];
+        $data['year'] = $request['year'];
+        $data['academicLevel'] = $request['academicLevel'];
 
-        // $data['semesterPeriod'] = $request['semesterPeriod'];
-        // $data['year'] = $request['year'];
-        // $data['academicLevel'] = $request['academicLevel'];
+        $semester = Semester::find($id);
 
-        // if( $semester::update($data))
-        // return redirect()->route('semesters/index')->with('status', 
-        // 'Semester was updated successfully');
-        // else
-        // return redirect()->back()->with('status', 
-        // 'Something went wrong while updating!');
+        if( $semester::update($data))
+        return redirect()->route('semesters.index')->with('success', 
+        'Semester was updated successfully');
+        else
+        return redirect()->back()->with('error', 
+        'Something went wrong while updating!');
     }
 
     /**
@@ -133,13 +144,13 @@ class SemestersController extends Controller
      */
     public function destroy($id)
     {
-        // $semester = Semester::find($id);
+        $semester = Semester::find($id);
         
-        // if($semester->delete())
-        // return redirect()->route('semesters/index')->with('status', 
-        // 'Semester was deleted successfully');
-        // else
-        // return redirect()->back()->with('status', 
-        // 'Something went wrong while deleting!');
+        if($semester->delete())
+        return redirect()->route('semesters.index')->with('success', 
+        'Semester was deleted successfully');
+        else
+        return redirect()->back()->with('error', 
+        'Something went wrong while deleting!');
     }
 }

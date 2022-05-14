@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Semester;
+
 class Student extends Model
 {
     use HasFactory;
@@ -18,7 +20,9 @@ class Student extends Model
         'levelOfStudies',
         'yearOfStudies',
         'scholarship',
-        'part_timeStudent'
+        'part_timeStudent',
+        'created_at',
+        'updated_at'
     ];
 
     public function semester(){

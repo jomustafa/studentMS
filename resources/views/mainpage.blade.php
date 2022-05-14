@@ -37,7 +37,7 @@
       <div class="card-body">
         <h5 class="card-title">Manage Students</h5>
         <p class="card-text">Enroll Students, Delete and Update their information!</p>
-        <a href="/students" class="btn btn-primary">Go to Students</a>
+        <a href="/studentsMainPage" class="btn btn-primary">Go to Students</a>
       </div>
     </div>
 </div>

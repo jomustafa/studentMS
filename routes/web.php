@@ -40,19 +40,21 @@ Route::get('/manageUnits', function (){
 
 Route::get('/units/create', [UnitsController::class, 'create'])->name('units.create');
 
-Route::get('/students/assign', [StudentsController::class, 'create'])->name('students.assign');
+//semesters
+Route::get('/semesters', [SemestersController::class, 'index'])->name('semester.index');
+Route::get('/semester/create', [SemestersController::class, 'create'])->name('semester.create');
+Route::get('/semester/{semester}/show', [SemestersController::class, 'show'])->name('semester.show');
+Route::post('/semester/store', [SemestersController::class, 'store'])->name('semester.store');
+Route::get('/semester/{semester}/edit', [SemestersController::class, 'edit'])->name('semester.edit');
+Route::put('/semester/{semester}/update', [SemestersController::class, 'update'])->name('semester.update');
+Route::delete('/semester/{semester}/destroy', [SemestersController::class, 'destroy'])->name('semester.destroy');
 
-Route::resource('/semesters',SemestersController::class);
+// Route::get('/semester/{semester}/student/create', [StudentsController::class, 'create'])->name('students.create');
+// Route::post('/semester/{semester}/student/store', [StudentsController::class, 'store'])->name('students.store');
 
-Route::resource('/students',StudentsController::class);
+Route::get('/student/create', [StudentsController::class, 'create'])->name('students.create');
+Route::post('/student/store', [StudentsController::class, 'store'])->name('students.store');
 
-//mi search
-// Route::get('/semesters/search', [SemestersController::class, 'show'])->name('semesters.search');
-//Route::get('redirects','App\Http\Controllers\HomeController@index');
-// Route::get('units', function(){
-//     return view('Units/search');
-// })->name('units.search');
-
-// Route::get('semesters', function(){
-//     return view('Semesters/index');
-// })->name('semesters.index');
+Route::get('/students/{semester}/student/edit', [StudentsController::class, 'edit'])->name('students.edit');
+Route::put('/students/{semester}/student/update', [StudentsController::class, 'update'])->name('students.update');
+Route::get('/student/{student}/destroy', [StudentsController::class, 'destroy'])->name('students.destroy');

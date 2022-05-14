@@ -15,8 +15,8 @@ class CreateSemestersTable extends Migration
     {
         Schema::create('semesters', function (Blueprint $table) {
             $table->id();
-            $table->string('semesterPeriod',250)->default("unspecified");
-            $table->integer('year');
+            $table->string('semesterPeriod',150)->nullable();
+            $table->string('year', 150);
             $table->integer('academicLevel');
             $table->timestamps();
         });
