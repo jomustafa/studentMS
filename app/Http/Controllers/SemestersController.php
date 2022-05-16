@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Semester;
 use App\Models\Student;
+use Validator;
 
 class SemestersController extends Controller
 {
@@ -16,9 +17,14 @@ class SemestersController extends Controller
      */
     public function index()
     {
-        // $semesters = DB::table('semesters')->paginate(10);
+        // if($request != ""){
+        //     $search = $request::get('search');
+        // $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%');
+        // }
+        // else{
+        //     $semesters = Semester::orderBy('id', 'DESC')->get();
+        // }
         // return view('semesters.index')->with('semesters', $semesters);
-
         $semesters = Semester::orderBy('id', 'DESC')->get();
         return view('semesters.index')->with('semesters', $semesters);
     }
@@ -34,17 +40,17 @@ class SemestersController extends Controller
 
     }
 
-    public function search(Request $request){
+    // public function search(Request $request){
 
-        $search = $request->get('search');
-        $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%')-paginate(5);
+    //     $search = $request->get('search');
+    //     $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%')-paginate(5);
 
-        if(count($semesters) > 0)
-        return view('semesters.index', ['semesters' => $semesters]);
-        else
-        return view('semesters.index')->with('status', 
-        'No results!');
-    }
+    //     if(count($semesters) > 0)
+    //     return view('semesters.index', ['semesters' => $semesters]);
+    //     else
+    //     return view('semesters.index')->with('status', 
+    //     'No results!');
+    // }
     /**
      * Store a newly created resource in storage.
      *
@@ -55,9 +61,9 @@ class SemestersController extends Controller
     {
         
         $request->validate([
-            'semesterPeriod' => 'required',
-            'year' => 'required',
-            'academicLevel' => 'required'
+            'semesterPeriod' => 'required|in:fall, Fall, Spring, spring',
+            'year' => 'required|regex:/(2)[0-9,-]{8}/',
+            'academicLevel' => 'required|regex:/[1-3]{1}/'
         ]);
 
         $data['semesterPeriod'] = $request['semesterPeriod'];
@@ -80,17 +86,10 @@ class SemestersController extends Controller
      */
     public function show($id)
     {
-        // // $semester = Semester::find($id);
-        // // $searchInput = Input::get('searchInput');
-        // // info($searchInput);
-        // // return view('semesters/show');
-        // // ->with('semester',$semester);
-
-        // //mi kqyr studentat e qati semestri
-        $semester = Semester::find($id);
-        $students = $semester->students;
-
-        return view('semesters.show');
+       
+        // //mi kqyr studentat e qati semestri specifik
+        $semesters = Semester::find($id);
+        return view('semesters.show')->with('semesters', $semesters);
 
     }
 
@@ -115,10 +114,11 @@ class SemestersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //n edit qitu duhet me ndreq validimin
         $request->validate([
-            'semesterPeriod' => 'required',
-            'year' => 'required',
-            'academicLevel' => 'required'
+            'semesterPeriod' => 'required_without_all:year,academicLevel|in:fall, Fall, Spring, spring',
+            'year' => 'required_without_all:semesterPeriod,academicLevel|regex:/(2)[0-9,-]{8}/',
+            'academicLevel' => 'required_without_all:semesterPeriod,year|regex:/[1-3]{1}/'
         ]);
 
         
@@ -128,8 +128,8 @@ class SemestersController extends Controller
 
         $semester = Semester::find($id);
 
-        if( $semester::update($data))
-        return redirect()->route('semesters.index')->with('success', 
+        if( $semester::where('id',$id)->update($data))
+        return redirect()->route('semester.index')->with('success', 
         'Semester was updated successfully');
         else
         return redirect()->back()->with('error', 
@@ -147,7 +147,7 @@ class SemestersController extends Controller
         $semester = Semester::find($id);
         
         if($semester->delete())
-        return redirect()->route('semesters.index')->with('success', 
+        return redirect()->route('semester.index')->with('success', 
         'Semester was deleted successfully');
         else
         return redirect()->back()->with('error', 

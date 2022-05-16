@@ -40,21 +40,27 @@ Route::get('/manageUnits', function (){
 
 Route::get('/units/create', [UnitsController::class, 'create'])->name('units.create');
 
-//semesters
+//semesters routes
 Route::get('/semesters', [SemestersController::class, 'index'])->name('semester.index');
 Route::get('/semester/create', [SemestersController::class, 'create'])->name('semester.create');
 Route::get('/semester/{semester}/show', [SemestersController::class, 'show'])->name('semester.show');
 Route::post('/semester/store', [SemestersController::class, 'store'])->name('semester.store');
 Route::get('/semester/{semester}/edit', [SemestersController::class, 'edit'])->name('semester.edit');
 Route::put('/semester/{semester}/update', [SemestersController::class, 'update'])->name('semester.update');
-Route::delete('/semester/{semester}/destroy', [SemestersController::class, 'destroy'])->name('semester.destroy');
+Route::get('/semester/{semester}/destroy', [SemestersController::class, 'destroy'])->name('semester.destroy');
 
-// Route::get('/semester/{semester}/student/create', [StudentsController::class, 'create'])->name('students.create');
-// Route::post('/semester/{semester}/student/store', [StudentsController::class, 'store'])->name('students.store');
-
+//student routes
+Route::get('/units/index', [StudentsController::class, 'index'])->name('students.index');
 Route::get('/student/create', [StudentsController::class, 'create'])->name('students.create');
 Route::post('/student/store', [StudentsController::class, 'store'])->name('students.store');
-
 Route::get('/students/{semester}/student/edit', [StudentsController::class, 'edit'])->name('students.edit');
 Route::put('/students/{semester}/student/update', [StudentsController::class, 'update'])->name('students.update');
 Route::get('/student/{student}/destroy', [StudentsController::class, 'destroy'])->name('students.destroy');
+
+//units routes
+Route::get('/units/index', [UnitsController::class, 'index'])->name('units.index');
+Route::get('/unit/create', [UnitsController::class, 'create'])->name('units.create');
+Route::post('/unit/store', [UnitsController::class, 'store'])->name('units.store');
+Route::get('/unit/{semester}/unit/edit', [UnitsController::class, 'edit'])->name('units.edit');
+Route::put('/unit/{semester}/unit/update', [UnitsController::class, 'update'])->name('units.update');
+Route::get('/unit/{unit}/destroy', [UnitsController::class, 'destroy'])->name('units.destroy');

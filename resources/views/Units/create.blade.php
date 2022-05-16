@@ -1,98 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- <link rel = "stylesheet" href = "css/students.css"> -->
-<style>
-    .col-4{
-    background-color: #F4F4F4;
-    height: 600px;
-}
-.student{
-    font-weight:normal;
-    margin-top:20px;
-}
-.col{
-   
-   margin-bottom: 10px;
-}
+@extends('layouts.master')
 
-.secondInputs{
-    margin-bottom:10px;
-}
+@section('title', 'Create Unit')
 
-    </style>
-   @extends('layouts.head')
-   <title>Manage Units</title>
-</head>
-<body>
-    @include('layouts.navigation')
-    <div class = "row">
+@section('content')
+<h2>Create New Unit</h2>
 
-    <div class = "col-1 "></div>
-
-    <div class = "col-4">
-    <h2 class = "student">Add Unit</h2>
-        <p> Fill in unit details below to add new unit.</p>
-        <hr>
-        <h5 class = "student">Personal Information</h2>
-
-<form>
-  <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Unit name">
+<div class = "card">
+<div class = "card-body">
+    @if($errors->any())
+    <div class = "alert alert-info">
+    @foreach($errors->all() as $error)
+    {{$error}}
+    @endforeach
     </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Unit code">
-    </div>
-  </div>
-  <div class="row">
-      <div class = "col">
-      <select class="form-control">
-    <option>Credits</option>
-    </select>
-    </div>
-    <div class="col">
-    <select class="form-control">
-    <option>Lecturer</option>
-    </select>
-    </div>
-  </div>
-  <hr>
-  <button type="submit" class="btn btn-primary">Cancel</button>
-  <button type="submit" class="btn btn-primary">Add Unit</button>
-</form>
-
+    @endif
+<form action = "{{route('units.store')}}" method = "POST">
+@csrf
+<div class = "form-group">
+        <label for = "name">Unit Name</label>
+        <input type = "text" name = "name"  id = "name" value = "{{old('name')}}" placeholder = "Unit Name" class = "form-control">
     </div>
 
-    <div class = "col-2"></div>
+    <div class = "form-group">
+        <label for = "unitCode">Unit Code</label>
+        <input type = "text" name = "unitCode"  placeholder="Unit Code" id = "unitCode" value = "{{old('unitCode')}}" class = "form-control">
+    </div>
 
-    <div class = "col-4">
-    <h2 class = "student">Search Unit</h2>
-        <p> Search unit by Name or Unit Code.</p>
-        <hr>
-        <form>
-    <div class="row">
-        <div class = "col">
-    <input class="form-control dark bg-dark" type="search" placeholder="Search" aria-label="Search">
+    <div class = "form-group">
+        <label for = "credits">Credits</label>
+        <input type = "number" name = "credits"  placeholder="Credits" id = "credits" value = "{{old('credits')}}" class = "form-control">
+    </div>
+
+    <div class = "form-group">
+        <label for = "semester_id">Enroll Semester</label>
+        @if($semesters && count($semesters))
+        @foreach($semesters as $semester)
+        @endforeach
+       
+        <select name = "semester_id" id = "semester_id" value = "{{old('semester_id')}}" class = "form-control">
+        @foreach($semesters as $semester)  
+        
+        <option value= "" disabled selected hidden>Choose Semester</option> 
+        <option value = '{{$semester->id}}'>{{$semester->semesterPeriod}} {{$semester->year}}</option>
+        
+        @endforeach
+        
+        @else
+        <option value = "" disabled selected hidden>No existing semesters!</option>
+        @endif
+        </select>
+    </div>
+    <button class = "btn btn-sm btn-primary">Create Unit</button>
+</form> 
 </div>
-    <div class = "col">
-    <button class="btn btn-outline-dark my-2 my-sm-0 " type="submit">Search Unit</button>
-</div>
-  </div>
-</form>
-<hr>
-<div class = "secondInputs">
-<button type="button" class="btn btn-outline-dark">Information</button>
-</div>
-<div class = "secondInputs">
-<button type="button" class="btn btn-outline-dark">Assign to Semester</button>
-<hr>
-<button type="submit" class="btn btn-primary">Cancel</button>
-</div>
-    </div>
-
-    <div class = "col-1"></div>
-
-    </div>
-</body>
-</html>
+@endsection

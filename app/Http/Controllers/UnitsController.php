@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Semester;
+
 class UnitsController extends Controller
 {
     /**
@@ -12,9 +14,9 @@ class UnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $units =  DB::table('units')->paginate(10);
+        $units = Unit::orderBy('id', 'DESC')->get();
         return view('units.index')->with('units', $units);
 
     }
@@ -26,7 +28,8 @@ class UnitsController extends Controller
      */
     public function create()
     {
-        return view('units.create');
+        $semesters = Semester::orderBy('id', 'DESC')->get();
+        return view('units.create')->with('semesters', $semesters);
     }
 
     /**
@@ -37,7 +40,20 @@ class UnitsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|alpha',
+            'credits' => 'required|regex:/[0-9]{2}/',
+            'unitCode' => 'required'
+        ]);
+
+        $data['name'] = $request['name'];
+        $data['credits'] = $request['credits'];
+        $data['unitCode'] = $request['unitCode'];
+
+        if(Unit::create($data))
+        return redirect()->route('units.index')->with('success', 'Unit was created successfully');
+        else
+        return redirect()->back()->with('error', 'Something went wrong while creating Units!');
     }
 
     /**

@@ -44,7 +44,7 @@
 
 <div class = "container my-2">
    <p class = "text-center">
-       Copyright & copy: PER PROGRAMER {{date('Y')}}
+       Copyright & copy: CITY COLLEGE {{date('Y')}}
 </p>
 </div>
 

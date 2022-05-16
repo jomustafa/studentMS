@@ -14,7 +14,11 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function index(){
+        $students = Student::orderBy('lastName', 'DESC')->get();
+        return view('students.index')->with('students', $students);
+    }
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -40,9 +44,9 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'lastName' => 'required',
-            'age' => 'required',
+            'name' => 'required|alpha',
+            'lastName' => 'required|alpha',
+            'age' => 'required|regex:/[0-9]{2}//',
             'gender' => 'required',
             'levelOfStudies' => 'required',
             'yearOfStudies' => 'required',
@@ -64,7 +68,7 @@ class StudentsController extends Controller
   
 
         if( Student::create($data) )
-        return redirect()->route('student.index')->with('success', 
+        return redirect()->route('students.index')->with('success', 
         'Student was created successfully');
         else
         return redirect()->back()->with('error', 

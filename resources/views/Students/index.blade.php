@@ -11,16 +11,26 @@
 <table class = "table table-bordered">
         <tr>
             <th>Student ID</th>
-            <th>Student Name</th>
-            <th>Student Surname</th>
-            <th>Student Level</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Gender</th>
+            <th>Level of Studies</th>
+            <th>Year of Studies</th>
+            <th>Part Time</th>
+            <th>Enrollment Date</th>
         </tr>  
         @foreach($students as $student)
         <tr>
-            <td>{{$Student->id}}</td>
-            <td>{{$Student->name}}</td>
-            <td>{{$Student->lastName}}</td>
-            <td>{{$Student->levelOfStudies}}</td>
+            <td>{{$student->id}}</td>
+            <td>{{$student->name}}</td>
+            <td>{{$student->lastName}}</td>
+            <td>{{$student->gender}}</td>
+            <td>{{$student->levelOfStudies}}</td>
+            <td>{{$student->yearOfStudies}}</td>
+            <td>{{$student->part_timeStudent}}</td>
+            <td>{{$student->created_at}}</td>
+            
+
         </tr>  
         @endforeach
     </table>
