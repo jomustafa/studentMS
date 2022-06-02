@@ -1001,6 +1001,10 @@ select {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1069,6 +1073,9 @@ select {
 }
 .mb-4 {
   margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 .-mt-px {
   margin-top: -1px;
@@ -1290,6 +1297,9 @@ select {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.break-all {
+  word-break: break-all;
 }
 .rounded-md {
   border-radius: 0.375rem;

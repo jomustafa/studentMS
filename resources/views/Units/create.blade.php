@@ -32,6 +32,11 @@
     </div>
 
     <div class = "form-group">
+        <label for = "lecturer">Lecturer</label>
+        <input type = "text" name = "lecturer"  placeholder="Lecturer" id = "lecturer" value = "{{old('lecturer')}}" class = "form-control">
+    </div>
+
+    <div class = "form-group">
         <label for = "semester_id">Enroll Semester</label>
         @if($semesters && count($semesters))
         @foreach($semesters as $semester)

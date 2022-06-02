@@ -12,12 +12,12 @@
     @endforeach
     </div>
     @endif
-<form action = "{{route('students.update', ('student' => $student->id)] }}" method = "POST">
+<form action = "{{route('students.update', ['student' => $student->id]) }}" method = "POST">
 @method('put')
 @csrf
     <div class = "form-group">
         <label for = "name">Name</label>
-        <input type = "text" name = "name" id = "name" value = "{{$studnet->name}}" placeholder = "First Name" class = "form-control">
+        <input type = "text" name = "name" id = "name" value = "{{$student->name}}" placeholder = "First Name" class = "form-control">
     </div>
 
     <div class = "form-group">

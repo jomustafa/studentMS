@@ -9,7 +9,7 @@
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    
 </head>
 <body>
     
@@ -21,17 +21,43 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link {{Request::is('/') ? 'active':''}}" href="/">Home</a>
+        <li class="nav-item ">
+          <a class="nav-link" href="/mainpage">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{Request::is('semester.index') ? 'active':''}} " href="/semesters">Semesters</a>
+        <!-- semesters -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Semesters
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="/semesters">View Semesters</a>
+          <a class="dropdown-item" href="/semester/create">Add Semester</a>
+        </div>
+          <!-- <a class="nav-link {{Request::is('semester.index') ? 'active':''}} " href="/semesters">Semesters</a> -->
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{Request::is('units') || Request::is('units/create')? 'active':''}}" href="/units">Units</a>
+
+        <!-- units -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Units
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="/units/index">View Units</a>
+          <a class="dropdown-item" href="/unit/create">Add Unit</a>
+        </div>
+          <!-- <a class="nav-link {{Request::is('units') || Request::is('units/create')? 'active':''}}" href="/units">Units</a> -->
         </li>
-        <li class="nav-item">
-          <a class="nav-link {{Request::is('students.index') ? 'active':''}}" href="/students">Students</a>
+
+        <!-- students -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Students
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="/students/index">View Students</a>
+          <a class="dropdown-item" href="/student/create">Enroll Student</a>
+        </div>
+          <!-- <a class="nav-link {{Request::is('students.index') ? 'active':''}}" href="/students">Students</a> -->
         </li>
       </ul>
     </div>

@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   
-    <title>Units</title>
-    @extends('layouts.head')
-    <style>
-        svg{
-            width:20px;
-        }
-    </style>
-</head>
-<body>
-    @include('layouts.navigation')
-    <div class = "container my-4">  
+@extends('layouts.master')
 
-    @if(count($units))
+@section('title', 'Units of Semster')
 
-    <table class = "table table-bordered">
+@section('content')
+
+@if($units && count($units))
+@foreach($units as $unit)
+
+@endforeach
+<table class = "table table-bordered">
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Code</th>
+            <th>Unit Code</th>
             <th>Credits</th>
+            <th>Lecturer</th>
+            <th>Edit Unit</th>
+           
         </tr>  
         @foreach($units as $unit)
         <tr>
@@ -29,20 +24,20 @@
             <td>{{$unit->name}}</td>
             <td>{{$unit->unitCode}}</td>
             <td>{{$unit->credits}}</td>
+            <td>{{$unit->lecturer}}</td>
+            <td>
+            
+            <a href = "{{route('units.edit',['unit' => $unit->id])}}" class = "btn btn-sm btn-primary">Edit</a>
+            <a href = "{{route('units.destroy',['unit' => $unit->id])}}" class = "btn btn-sm btn-primary">Delete</a>
+            </td>
+            
+
         </tr>  
         @endforeach
     </table>
-    {{$units->links()}}
-    
-
-    @else
-    <div class = "alert alert-info">
-        No units available!
-    </div>
-    @endif
-
-
-
+@else
+<div class = "aler aler-info">
+    No existing units!
 </div>
-</body>
-</html>
+@endif
+@endsection

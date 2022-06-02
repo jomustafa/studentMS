@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<link rel = "stylesheet" href = "css/mainpage.css">
-  @extends('layouts.head')
-  
-</head>
-<body>
-@include('layouts.navigation')
+@extends('layouts.master')
+
+@section('title', 'Home Page')
+
+@section('content')
 <div class="row">  
 <div class = "col-sm-1"></div> 
   <div class="col-sm-4">
@@ -78,6 +74,4 @@
   <div class = "col-sm-1"></div>
 </div>
 
-
-</body>
-</html>
+@endsection

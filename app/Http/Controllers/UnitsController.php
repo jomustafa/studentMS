@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Semester;
+use App\Models\Unit;
 
 class UnitsController extends Controller
 {
@@ -43,12 +44,16 @@ class UnitsController extends Controller
         $request->validate([
             'name' => 'required|alpha',
             'credits' => 'required|regex:/[0-9]{2}/',
-            'unitCode' => 'required'
+            'unitCode' => 'required',
+            'semester_id' => 'required',
+            'lecturer' => 'required|alpha'
         ]);
 
         $data['name'] = $request['name'];
         $data['credits'] = $request['credits'];
         $data['unitCode'] = $request['unitCode'];
+        $data['semester_id'] = $request['semester_id'];
+        $data['lecturer'] = $request['lecturer'];
 
         if(Unit::create($data))
         return redirect()->route('units.index')->with('success', 'Unit was created successfully');
@@ -62,10 +67,6 @@ class UnitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -75,7 +76,8 @@ class UnitsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unit = Unit::find($id);
+        return view('units.edit')->with('unit', $unit);
     }
 
     /**
@@ -87,7 +89,26 @@ class UnitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|alpha',
+            'unitCode' => 'required',
+            'credits' => 'required|regex:/[0-9]{2}/',
+            'lecturer' => 'required|alpha'
+        ]);
+
+        $data['name'] = $request['name'];
+        $data['unitCode'] = $request['unitCode'];
+        $data['credits'] = $request['credits'];
+        $data['lecturer'] = $request['lecturer'];
+
+        $unit = Unit::find($id);
+
+        if( $unit::update($data))
+        return redirect()->route('unit.index')->with('success', 
+        'Unit was updated successfully');
+        else
+        return redirect()->back()->with('error', 
+        'Something went wrong while updating!');
     }
 
     /**
@@ -98,6 +119,13 @@ class UnitsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $unit = Unit::find($id);
+        
+        if($unit->delete())
+        return redirect()->route('units.index')->with('success', 
+        'Unit was deleted successfully');
+        else
+        return redirect()->back()->with('error', 
+        'Something went wrong while deleting!');
     }
 }

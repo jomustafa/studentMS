@@ -17,7 +17,8 @@ class Unit extends Model
         'credits',
         'created_at',
         'unitCode',
-        'updated_at'
+        'updated_at',
+        'lecturer'
     ];
 
     public function semester(){

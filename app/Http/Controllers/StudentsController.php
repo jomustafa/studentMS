@@ -133,8 +133,8 @@ class StudentsController extends Controller
     {
         $student = Student::find($id);
         
-        if($semester->delete())
-        return redirect()->route('student.index')->with('success', 
+        if($student->delete())
+        return redirect()->route('students.index')->with('success', 
         'Student was deleted successfully');
         else
         return redirect()->back()->with('error', 

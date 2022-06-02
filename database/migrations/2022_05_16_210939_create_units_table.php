@@ -19,6 +19,7 @@ class CreateUnitsTable extends Migration
             $table->string('name',150);
             $table->integer('credits')->default(10);
             $table->string('unitCode',150);
+            $table->string('lecturer',150);
             $table->timestamps();
         });
     }

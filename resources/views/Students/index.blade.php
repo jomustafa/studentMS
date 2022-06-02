@@ -18,6 +18,7 @@
             <th>Year of Studies</th>
             <th>Part Time</th>
             <th>Enrollment Date</th>
+            <th>Edit Student</th>
         </tr>  
         @foreach($students as $student)
         <tr>
@@ -29,7 +30,11 @@
             <td>{{$student->yearOfStudies}}</td>
             <td>{{$student->part_timeStudent}}</td>
             <td>{{$student->created_at}}</td>
-            
+            <td>
+              
+                <a href = "{{route('students.edit',['student' => $student->id])}}" class = "btn btn-sm btn-primary">Edit</a>
+                <a href = "{{route('students.destroy',['student' => $student->id])}}" class = "btn btn-sm btn-primary">Delete</a>
+            </td>
 
         </tr>  
         @endforeach
