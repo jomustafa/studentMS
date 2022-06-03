@@ -46,7 +46,7 @@ class StudentsController extends Controller
         $request->validate([
             'name' => 'required|alpha',
             'lastName' => 'required|alpha',
-            'age' => 'required|regex:/[0-9]{2}//',
+            'age' => 'required|regex:/[0-9]{2}/',
             'gender' => 'required',
             'levelOfStudies' => 'required',
             'yearOfStudies' => 'required',

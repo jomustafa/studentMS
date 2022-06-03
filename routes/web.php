@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('/semesters', [SemestersController::class, 'index'])->name('semester.index');
 Route::get('/semester/create', [SemestersController::class, 'create'])->name('semester.create');
 Route::get('/semester/{semester}/show', [SemestersController::class, 'show'])->name('semester.show');
+Route::get('/semester/{semester}/showUnits', [SemestersController::class, 'showUnits'])->name('semester.showUnits');
 Route::post('/semester/store', [SemestersController::class, 'store'])->name('semester.store');
 Route::get('/semester/{semester}/edit', [SemestersController::class, 'edit'])->name('semester.edit');
 Route::put('/semester/{semester}/update', [SemestersController::class, 'update'])->name('semester.update');

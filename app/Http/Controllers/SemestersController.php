@@ -40,17 +40,17 @@ class SemestersController extends Controller
 
     }
 
-    // public function search(Request $request){
+    public function search(Request $request){
 
-    //     $search = $request->get('search');
-    //     $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%')-paginate(5);
+        $search = $request->get('search');
+        $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%');
 
-    //     if(count($semesters) > 0)
-    //     return view('semesters.index', ['semesters' => $semesters]);
-    //     else
-    //     return view('semesters.index')->with('status', 
-    //     'No results!');
-    // }
+        if(count($semesters) > 0)
+        return view('semesters.index', ['semesters' => $semesters]);
+        else
+        return view('semesters.index')->with('status', 
+        'No results!');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -90,9 +90,13 @@ class SemestersController extends Controller
         // //mi kqyr studentat e qati semestri specifik
         $semesters = Semester::find($id);
         return view('semesters.show')->with('semesters', $semesters);
-
     }
 
+    public function showUnits($id){
+        $semesters = Semester::find($id);
+        return view('semesters.showUnits')->with('semesters',$semesters);
+
+    }
     /**
      * Show the form for editing the specified resource.
      *

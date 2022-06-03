@@ -13,66 +13,13 @@
 </head>
 <body>
     
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand " href="#">Home </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="/mainpage">Home</a>
-        </li>
-        <!-- semesters -->
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Semesters
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="/semesters">View Semesters</a>
-          <a class="dropdown-item" href="/semester/create">Add Semester</a>
-        </div>
-          <!-- <a class="nav-link {{Request::is('semester.index') ? 'active':''}} " href="/semesters">Semesters</a> -->
-        </li>
 
-        <!-- units -->
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Units
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="/units/index">View Units</a>
-          <a class="dropdown-item" href="/unit/create">Add Unit</a>
-        </div>
-          <!-- <a class="nav-link {{Request::is('units') || Request::is('units/create')? 'active':''}}" href="/units">Units</a> -->
-        </li>
-
-        <!-- students -->
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Students
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        <a class="dropdown-item" href="/students/index">View Students</a>
-          <a class="dropdown-item" href="/student/create">Enroll Student</a>
-        </div>
-          <!-- <a class="nav-link {{Request::is('students.index') ? 'active':''}}" href="/students">Students</a> -->
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class = "container my-4">
+<div class = "container my-5">
     @yield('content')
 </div>
 
-<div class = "container my-2">
-   <p class = "text-center">
-       Copyright & copy: CITY COLLEGE {{date('Y')}}
-</p>
-</div>
+
 
 </body>
+
 </html>

@@ -1,10 +1,17 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Edit Semester') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 @extends('layouts.master')
 
-@section('title', 'Edit Semester')
 
-@section('content')
-
-<h4>Edit Semester: {{$semester->semesterPeriod}}-{{$semester->year}}</h4>
+<h4> {{ucfirst($semester->semesterPeriod)}}-{{$semester->year}}</h4>
 
 <div class = "card">
 <div class = "card-body">
@@ -42,4 +49,4 @@
 </form> 
 </div>
 </div>
-@endsection
+</x-app-layout>

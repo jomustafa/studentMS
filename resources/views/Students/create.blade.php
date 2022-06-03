@@ -1,9 +1,15 @@
-@extends('layouts.master')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Enroll new Student') }}
+        </h2>
+    </x-slot>
 
-@section('title', 'Create Student')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            @extends('layouts.master')
 
-@section('content')
-<h2>Enroll New Student</h2>
 <div class = "card">
 <div class = "card-body">
     @if($errors->any())
@@ -97,9 +103,13 @@
         <option value = '1'>No</option>
     </select>
     </div>
-
-    <button class = "btn btn-sm btn-primary">Enroll Student</button>
+    <button class = "btn btn btn-primary  my-3  mb-1 ">Enroll Student</button>
 </form> 
 </div>
 </div>
-@endsection
+</div>
+  </div> 
+</div>
+
+  
+</x-app-layout>

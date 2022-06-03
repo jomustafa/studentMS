@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Currently Enrolled Students') }}
+            {{ __('Currently Assigned Units') }}
         </h2>
     </x-slot>
 
@@ -12,30 +12,34 @@
 
 <h4>Semester: {{ ucfirst($semesters->semesterPeriod)}}-{{$semesters->year}}</h4>
 
- @if($semesters->students)
+ @if($semesters->units)
 
-    @foreach($semesters->students as $student)
+    @foreach($semesters->units as $unit)
     <table class = "table table-bordered">
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Last Name</th>
-            <th>Year of Studies</th>
-            <th>Information</th>
+            <th>Credits</th>
+            <th>Code</th>
+            <th>Lecturer</th>
+            <th>Created At</th>
+
         </tr>
         <tr>
-            <td>{{$student->id}}</td>
-            <td>{{$student->name}}</td>
-            <td>{{$student->lastName}}</td>
-            <td>{{$student->yearOfStudies}}</td>
-            <td>                <a href = "{{route('students.edit',['student' => $student->id])}}" class = "btn btn-sm btn-primary">View</a></td>
+            <td>{{$unit->id}}</td>
+            <td>{{$unit->name}}</td>
+            <td>{{$unit->credits}}</td>
+            <td>{{$unit->unitCode}}</td>
+            <td>{{$unit->lecturer}}</td>
+            <td>{{$unit->created_at}}</td>
+           
         </tr>    
     </table>    
     @endforeach
   
     @else
     <div class = "aler aler-info">
-    No existing student!
+    No enrolled unit on this semester!
     </div>
     @endif
 
