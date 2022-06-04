@@ -45,6 +45,8 @@
             <td>{{$student->part_timeStudent}}</td>
             <td>{{$student->created_at}}</td>
             <td>
+                
+                <a href = "#" class = "btn btn-sm btn-primary my-2 my-sm-1" >View Semesters</a>
                 <a href = "{{route('students.edit',['student' => $student->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1">Edit</a>
                 <a href = "{{route('students.destroy',['student' => $student->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1"  onclick="return confirm('Delete Student?')">Delete</a>
             </td>

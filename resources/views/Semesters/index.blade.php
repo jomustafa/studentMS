@@ -17,6 +17,7 @@
     <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </nav> 
   </form>
+  
   <a href = "{{route('semester.create')}}" class = "btn btn-primary my-2  mb-2">Add Semester</a>
 
 @if($semesters && count($semesters))

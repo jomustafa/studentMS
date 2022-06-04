@@ -15,18 +15,22 @@ class SemestersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // if($request != ""){
-        //     $search = $request::get('search');
-        // $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%');
-        // }
-        // else{
-        //     $semesters = Semester::orderBy('id', 'DESC')->get();
-        // }
-        // return view('semesters.index')->with('semesters', $semesters);
-        $semesters = Semester::orderBy('id', 'DESC')->get();
-        return view('semesters.index')->with('semesters', $semesters);
+
+            $search = $request->get('search');
+            $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%')->get();
+           
+            if(count($semesters) > 0)
+          
+            return view('semesters.index')->with('semesters', $semesters);
+            
+            else
+                $semesters = Semester::orderBy('id', 'DESC')->get();
+                return view('semesters.index')->with('semesters', $semesters);
+            
+
+       
     }
 
     /**
@@ -40,17 +44,17 @@ class SemestersController extends Controller
 
     }
 
-    public function search(Request $request){
+    // public function search(Request $request){
 
-        $search = $request->get('search');
-        $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%');
+    //     $search = $request->get('search');
+    //     $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%');
 
-        if(count($semesters) > 0)
-        return view('semesters.index', ['semesters' => $semesters]);
-        else
-        return view('semesters.index')->with('status', 
-        'No results!');
-    }
+    //     if(count($semesters) > 0)
+    //     return view('semesters.index', ['semesters' => $semesters]);
+    //     else
+    //     return view('semesters.index')->with('status', 
+    //     'No results!');
+    // }
     /**
      * Store a newly created resource in storage.
      *

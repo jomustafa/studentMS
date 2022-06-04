@@ -18,6 +18,18 @@ class StudentsController extends Controller
         $students = Student::orderBy('lastName', 'DESC')->get();
         return view('students.index')->with('students', $students);
     }
+
+    public function show($id){
+        // to see assigned semesters
+        // $students = Student::find($id);
+        // $semesters = Semester::find($id);
+        // return view('students.showSemester')->with('semesters', $semesters,'students',$students);
+        // $students = Student::find($id)->where($students->semester)->get();
+        
+        // return view('students.showSemester')->with('semesters', $semesters);
+        // $semesters = Semester::find($id);
+        // return view('students.showSemester')->with('students', $semesters->students);
+    }
    
     /**
      * Show the form for creating a new resource.
