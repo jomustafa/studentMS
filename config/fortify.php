@@ -61,9 +61,7 @@ return [
     |
     */
 
-    'home' => function(){
-        return route('dashboard');
-    }
+    'home' => 'dashboard',
 
     /*
     |--------------------------------------------------------------------------
@@ -134,9 +132,7 @@ return [
     */
 
     'features' => [
-        // Features::registration(),
         Features::resetPasswords(),
-        // Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([
