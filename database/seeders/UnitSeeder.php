@@ -19,8 +19,11 @@ class UnitSeeder extends Seeder
         
         foreach(range(0,20) as $i){
             unit::create([
+                'semester_id' => $faker->numberBetween(1,15),
                 'name' => $faker->sentence(3),
-                'unitCode' => $faker->sentence(2)
+                'credits' => $faker->randomElement(['10', '20']),
+                'unitCode' => $faker->sentence(2),
+                'lecturer' => $faker->name()
             ]);
         }
         

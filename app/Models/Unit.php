@@ -24,4 +24,8 @@ class Unit extends Model
     public function semester(){
         return $this->belongsTo(Semester::class);
     }
+
+    public function resit(){
+        return $this->hasMany(Resit::class);
+    }
 }

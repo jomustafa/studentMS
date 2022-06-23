@@ -5,6 +5,7 @@ use App\Http\Controllers\SemestersController;
 use App\Http\Controllers\UnitsController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResitsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::get('/forbidden', function(){
 //routes that can be accessed by administrators, lecturers, course admins
 //semesters routes
 Route::get('/semesters/{semester?}', [SemestersController::class, 'index'])->name('semester.index')->middleware('auth');
+Route::get('/semesters/{semester}/search', [SemestersController::class, 'search'])->name('semester.search')->middleware('auth');
 Route::get('/semester/{semester}/show', [SemestersController::class, 'show'])->name('semester.show')->middleware('auth');
 Route::get('/semester/{semester}/showUnits', [SemestersController::class, 'showUnits'])->name('semester.showUnits')->middleware('auth');
 //student routes
@@ -44,6 +46,11 @@ Route::get('/students/index', [StudentsController::class, 'index'])->name('stude
 // Route::get('/student/{student}/showSemester', [StudentsController::class, 'show'])->name('students.show');
 //units routes
 Route::get('/units/index', [UnitsController::class, 'index'])->name('units.index')->middleware('auth');
+//resit routes 
+Route::get('/resits/index', [ResitsController::class, 'index'])->name('resits.index')->middleware('auth');
+Route::get('/resit/create', [ResitsController::class, 'create'])->name('resits.create')->middleware('auth');
+Route::post('/resit/store', [ResitsController::class, 'store'])->name('resits.store')->middleware('auth');
+Route::get('/resit/{resit}/destroy', [ResitsController::class, 'destroy'])->name('resits.destroy')->middleware('auth');
 
     //routes that can be accessed only by Academic Administrators
     Route::group(['middleware' => 'App\Http\Middleware\AcademicAdminMiddleware'], function(){

@@ -42,7 +42,7 @@
         <input readonly type = "text" value = "{{$semester->academicLevel}}" class = "form-control">
 
         <label for = "academicLevel">New Academic Level:</label>
-        <input type = "integer" name = "academicLevel" id = "academicLevel" value = "{{$semester->academicLevel}}" class = "form-control">
+        <input type = "integer" name = "academicLevel" id = "academicLevel"  class = "form-control">
     </div>
 
     <button class = "btn btn-sm btn-primary">Update</button>
