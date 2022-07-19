@@ -39,8 +39,27 @@
         <input type = "text" name = "age" id = "age" value = "{{old('age')}}"  placeholder = "Age" class = "form-control">
     </div>
 
-    <div class = "form-group">
+    <!-- <div class = "form-group">
        <a href = "{{route('students.destroy', ['student' => $student->id])}}" class = "btn btn-sm btn-link " onclick = "return confirm ('Delete Student?');"></a>
+    </div> -->
+    <div class = "form-group">
+        <label for = "semester_id">Enroll Semester</label>
+        @if($semesters && count($semesters))
+        @foreach($semesters as $semester)
+        @endforeach
+       
+        <select name = "semester_id" id = "semester_id" value = "{{old('semester_id')}}" class = "form-control">
+        @foreach($semesters as $semester)  
+        
+        <option value= "" disabled selected hidden>Choose Semester</option> 
+        <option value = '{{$semester->id}}'>{{$semester->semesterPeriod}} {{$semester->year}}</option>
+        
+        @endforeach
+        
+        @else
+        <option value = "" disabled selected hidden>No existing semesters!</option>
+        @endif
+        </select>
     </div>
 
     <button class = "btn btn-sm btn-primary">Edit</button>

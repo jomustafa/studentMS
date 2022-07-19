@@ -10,12 +10,14 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 @extends('layouts.master')
 
-<form action = "{{route('semester.index')}}" class="form-inline" method = "GET" role = "search">  
+
+<form action = "{{route('units.index')}}" class="form-inline" method = "GET" >  
     <nav class="navbar navbar-light bg-light">
-    <input  type="search" class="form-control mr-sm-2 mb-2" id = "search" placeholder="Search Units" aria-label="search" >
+    <input  type="search" name = "search" class="form-control mr-sm-2 mb-2" placeholder="Search Units" aria-label="search" >
     <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </nav> 
   </form>
+  
 <a href = "{{route('units.create')}}" class = "btn btn-primary my-2  mb-2">Add New Unit</a>
 
 @if($units && count($units))
@@ -39,8 +41,9 @@
             <td>{{$unit->unitCode}}</td>
             <td>{{$unit->credits}}</td>
             <td>{{$unit->lecturer}}</td>
-            <td>
             
+            <td>
+            <a href = "{{route('units.show',['unit' => $unit->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1">View Resits</a>
             <a href = "{{route('units.edit',['unit' => $unit->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1">Edit</a>
             <a href = "{{route('units.destroy',['unit' => $unit->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1" onclick="return confirm('Delete Unit?')">Delete</a>
             </td>

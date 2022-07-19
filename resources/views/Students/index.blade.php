@@ -11,9 +11,10 @@
             @extends('layouts.master')
 
 
-            <form action = "{{route('students.index')}}" class="form-inline" method = "GET" role = "search">  
+
+            <form action = "{{route('students.search')}}" class="form-inline" method = "GET" >  
     <nav class="navbar navbar-light bg-light">
-    <input  type="search" class="form-control mr-sm-2 mb-2" id = "search" placeholder="Search Students" aria-label="search" >
+    <input  type="search" name = "search" class="form-control mr-sm-2 mb-2" placeholder="Search Students" aria-label="search" >
     <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </nav> 
   </form>
@@ -42,11 +43,15 @@
             <td>{{$student->lastName}}</td>
             <td>{{$student->levelOfStudies}}</td>
             <td>{{$student->yearOfStudies}}</td>
-            <td>{{$student->part_timeStudent}}</td>
+            @if($student->part_timeStudent == '1')
+            <td>Yes</td>
+            @else
+            <td>No</td>
+            @endif
             <td>{{$student->created_at}}</td>
             <td>
                 
-                <a href = "#" class = "btn btn-sm btn-primary my-2 my-sm-1" >View Semesters</a>
+                <!-- <a href = "#" class = "btn btn-sm btn-primary my-2 my-sm-1" >View Semesters</a> -->
                 <a href = "{{route('students.edit',['student' => $student->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1">Edit</a>
                 <a href = "{{route('students.destroy',['student' => $student->id])}}" class = "btn btn-sm btn-primary my-2 my-sm-1"  onclick="return confirm('Delete Student?')">Delete</a>
             </td>

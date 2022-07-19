@@ -44,15 +44,15 @@ class SemestersController extends Controller
 
     }
 
-    // public function search(Request $request){
+    // public function search(){
 
-    //     $search = $request->get('search');
+    //     $search = Input::get('search');
     //     $semesters = DB::table('semesters')->where('semesterPeriod', 'LIKE', '%' .$search. '%');
 
     //     if(count($semesters) > 0)
-    //     return view('semesters.index', ['semesters' => $semesters]);
+    //     return view('semester.index', ['semesters' => $semesters]);
     //     else
-    //     return view('semesters.index')->with('status', 
+    //     return view('semester.index')->with('status', 
     //     'No results!');
     // }
     /**
@@ -65,7 +65,7 @@ class SemestersController extends Controller
     {
         
         $request->validate([
-            'semesterPeriod' => 'required|in:fall, Fall, Spring, spring',
+            'semesterPeriod' => 'required',
             'year' => 'required|regex:/(2)[0-9,-]{8}/',
             'academicLevel' => 'required|regex:/[1-3]{1}/'
         ]);
@@ -124,9 +124,9 @@ class SemestersController extends Controller
     {
         //n edit qitu duhet me ndreq validimin
         $request->validate([
-            'semesterPeriod' => 'required_without_all:year,academicLevel|in:fall, Fall, Spring, spring',
-            'year' => 'required_without_all:semesterPeriod,academicLevel|regex:/(2)[0-9,-]{8}/',
-            'academicLevel' => 'required_without_all:semesterPeriod,year|regex:/[1-3]{1}/'
+            'semesterPeriod' => 'in:fall, Fall, Spring, spring',
+            'year' => 'regex:/(2)[0-9,-]{8}/',
+            'academicLevel' => 'regex:/[1-3]/'
         ]);
 
         
@@ -137,7 +137,7 @@ class SemestersController extends Controller
         $semester = Semester::find($id);
 
         if( $semester::where('id',$id)->update($data))
-        return redirect()->route('semester.index')->with('success', 
+        return redirect()->route('semester.index')->with('message', 
         'Semester was updated successfully');
         else
         return redirect()->back()->with('error', 

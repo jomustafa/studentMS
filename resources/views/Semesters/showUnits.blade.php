@@ -25,14 +25,14 @@
             <th>Created At</th>
 
         </tr>
+        
         <tr>
             <td>{{$unit->id}}</td>
             <td>{{$unit->name}}</td>
             <td>{{$unit->credits}}</td>
             <td>{{$unit->unitCode}}</td>
             <td>{{$unit->lecturer}}</td>
-            <td>{{$unit->created_at}}</td>
-           
+            <td>{{$unit->created_at}}</td>  
         </tr>    
     </table>    
     @endforeach

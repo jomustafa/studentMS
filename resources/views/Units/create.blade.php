@@ -63,5 +63,11 @@
     </div>
     <button class = "btn btn btn-primary  my-3  mb-1 ">Create Unit</button>
 </form> 
+
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 </div>
 </x-app-layout>

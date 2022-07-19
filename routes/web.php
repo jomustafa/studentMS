@@ -20,7 +20,7 @@ use App\Http\Controllers\ResitsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');;
 
 Route::get('/mainpage', function (){
     return view('semesters/mainpage' );
@@ -38,14 +38,15 @@ Route::get('/forbidden', function(){
 //routes that can be accessed by administrators, lecturers, course admins
 //semesters routes
 Route::get('/semesters/{semester?}', [SemestersController::class, 'index'])->name('semester.index')->middleware('auth');
-Route::get('/semesters/{semester}/search', [SemestersController::class, 'search'])->name('semester.search')->middleware('auth');
 Route::get('/semester/{semester}/show', [SemestersController::class, 'show'])->name('semester.show')->middleware('auth');
 Route::get('/semester/{semester}/showUnits', [SemestersController::class, 'showUnits'])->name('semester.showUnits')->middleware('auth');
 //student routes
-Route::get('/students/index', [StudentsController::class, 'index'])->name('students.index')->middleware('auth');
+Route::get('/students/{student?}', [StudentsController::class, 'index'])->name('students.index')->middleware('auth');
+Route::get('/students/search', [StudentsController::class, 'search'])->name('students.search')->middleware('auth');
 // Route::get('/student/{student}/showSemester', [StudentsController::class, 'show'])->name('students.show');
 //units routes
-Route::get('/units/index', [UnitsController::class, 'index'])->name('units.index')->middleware('auth');
+Route::get('/units/{unit?}', [UnitsController::class, 'index'])->name('units.index')->middleware('auth');
+Route::get('/units/{unit}/show', [UnitsController::class, 'show'])->name('units.show')->middleware('auth');
 //resit routes 
 Route::get('/resits/index', [ResitsController::class, 'index'])->name('resits.index')->middleware('auth');
 Route::get('/resit/create', [ResitsController::class, 'create'])->name('resits.create')->middleware('auth');

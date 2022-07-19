@@ -15,10 +15,19 @@ class UnitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $units = Unit::orderBy('id', 'DESC')->get();
+        $search = $request->get('search');
+        $units = DB::table('units')->where('name', 'LIKE', '%' .$search. '%')
+        ->orWhere('unitCode', 'LIKE', '%' .$search. '%')->orWhere('lecturer', 'LIKE', '%' .$search. '%')->get();
+       
+        if(count($units) > 0)
+      
         return view('units.index')->with('units', $units);
+        
+        else
+            $units = Unit::orderBy('id', 'DESC')->get();
+            return view('units.index')->with('units', $units);
 
     }
    
@@ -33,6 +42,11 @@ class UnitsController extends Controller
         return view('units.create')->with('semesters', $semesters);
     }
 
+    public function show($id){
+        
+        $units = Unit::find($id);
+        return view('units.show')->with('units', $units);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -42,7 +56,7 @@ class UnitsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|alpha',
+            'name' => 'required',
             'credits' => 'required|regex:/[0-9]{2}/',
             'unitCode' => 'required',
             'semester_id' => 'required',

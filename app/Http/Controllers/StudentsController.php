@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Student;
 use App\Models\Semester;
-
+use Validator;
 
 class StudentsController extends Controller
 {
@@ -14,21 +15,27 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $students = Student::orderBy('lastName', 'DESC')->get();
+    public function index(Request $request){
+
+        $search = $request->get('search');
+        $students = DB::table('students')->where('name', 'LIKE', '%' .$search. '%')->orWhere('yearOfStudies', 'LIKE', '%' .$search. '%')
+        ->orWhere('levelOfStudies', 'LIKE', '%' .$search. '%')->get();
+       
+        if(count($students) > 0)
+      
         return view('students.index')->with('students', $students);
+        
+        else
+            $students = Student::orderBy('id', 'DESC')->get();
+            return view('students.index')->with('students', $students);
+
+        // $students = Student::orderBy('lastName', 'DESC')->get();
+        // return view('students.index')->with('students', $students);
     }
 
     public function show($id){
-        // to see assigned semesters
-        // $students = Student::find($id);
-        // $semesters = Semester::find($id);
-        // return view('students.showSemester')->with('semesters', $semesters,'students',$students);
-        // $students = Student::find($id)->where($students->semester)->get();
-        
-        // return view('students.showSemester')->with('semesters', $semesters);
-        // $semesters = Semester::find($id);
-        // return view('students.showSemester')->with('students', $semesters->students);
+       // to see assigned semesters
+       
     }
    
     /**
@@ -102,8 +109,10 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
+        $semesters = Semester::orderBy('id', 'DESC')->get();
         $student = Student::find($id);
-        return view('students.edit')->with('student', $student);
+        return view('students.edit', compact (['semesters','student']));
+       
     }
 
     /**
@@ -115,20 +124,22 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'lastName' => 'required',
-            'age' => 'required'
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'lastName' => 'required',
+        //     'age' => 'required',
+        //     'semester_id' => 'required'
+        // ]);
 
         $data['name'] = $request['name'];
         $data['lastName'] = $request['lastName'];
         $data['age'] = $request['age'];
+        $data['semester_id'] = $request['semester_id'];
 
         $student = Student::find($id);
-
-        if( $student::update($data))
-        return redirect()->route('student.index')->with('success', 
+    
+        if(DB::table('students')->where('id',$id)->update($data))
+        return redirect()->route('students.index')->with('success', 
         'Student was updated successfully');
         else
         return redirect()->back()->with('error', 

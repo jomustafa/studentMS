@@ -28,7 +28,7 @@
             <td>{{$student->name}}</td>
             <td>{{$student->lastName}}</td>
             <td>{{$student->yearOfStudies}}</td>
-            <td>                <a href = "{{route('students.edit',['student' => $student->id])}}" class = "btn btn-sm btn-primary">View</a></td>
+            <td>                <a href = "{{route('students.edit',['student' => $student->id])}}" class = "btn btn-sm btn-primary">Edit</a></td>
         </tr>    
     </table>    
     @endforeach

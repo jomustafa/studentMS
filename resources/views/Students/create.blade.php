@@ -99,8 +99,8 @@
     <label for = "part_timeStudent">Part-time Student</label>
     <select name = "part_timeStudent" id = "part_timeStudent" value = "{{old('part_timeStudent')}}" class = "form-control">
     <option value= "" disabled selected hidden>Choose options</option>
-        <option value = '0'>Yes</option>
-        <option value = '1'>No</option>
+        <option value = '1'>Yes</option>
+        <option value = '0'>No</option>
     </select>
     </div>
     <button class = "btn btn btn-primary  my-3  mb-1 ">Enroll Student</button>

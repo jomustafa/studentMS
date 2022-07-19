@@ -11,9 +11,9 @@
 @extends('layouts.master')
 
 
-  <form action = "{{route('semester.index')}}" class="form-inline" method = "GET" role = "search">  
+  <form action = "{{route('semester.index')}}" class="form-inline" method = "GET" >  
     <nav class="navbar navbar-light bg-light">
-    <input  type="search" class="form-control mr-sm-2 mb-2" id = "search" placeholder="Search Semesters" aria-label="search" >
+    <input  type="search" name = "search" class="form-control mr-sm-2 mb-2" placeholder="Search Semesters" aria-label="search" >
     <button class="btn btn-sm btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </nav> 
   </form>
